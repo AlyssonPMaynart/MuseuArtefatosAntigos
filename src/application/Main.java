@@ -25,8 +25,7 @@ public class Main {
                 case 1:
                     // Cadastrar artefato
                     System.out.println("Digite o nome do artefato:");
-                    String nome = scanner.next();
-                    // ... (Solicitar os demais dados do artefato)
+                    String nome = scanner.next();// ... (Solicitar os demais dados do artefato)
                     Artefato novoArtefato = new Artefato(); // Criar o objeto Artefato
                     artefatos.add(novoArtefato);
                     System.out.println("Artefato cadastrado com sucesso!");
