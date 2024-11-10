@@ -12,7 +12,7 @@ import java.util.List;
         private Date datacao;
         private String estadoConservacao;
         private String valorHistorico;
-        private byte[] imagem; // Usando byte[] para representar o Blob
         private String localizacao;
+        private List<Evento> historico; // Lista de eventos relacionados ao artefato
 
     }
