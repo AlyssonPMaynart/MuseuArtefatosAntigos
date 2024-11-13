@@ -8,8 +8,11 @@ public class Funcionario {
     private int telefone;
     private String email;
     private String sexo;
+    private Float salario;
 
-    public Funcionario(int idFuncionario, String nome, String cpf, int idade, int telefone, String email, String sexo) {
+
+
+    public Funcionario(int idFuncionario, String nome, String cpf, int idade, int telefone, String email, String sexo, Float salario) {
         this.idFuncionario = idFuncionario;
         this.nome = nome;
         this.cpf = cpf;
@@ -17,6 +20,7 @@ public class Funcionario {
         this.telefone = telefone;
         this.email = email;
         this.sexo = sexo;
+        this.salario = salario;
     }
 
     public int getIdFuncionario() {
@@ -73,5 +77,12 @@ public class Funcionario {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+    public Float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Float salario) {
+        this.salario = salario;
     }
 }

@@ -1,45 +1,40 @@
 package application;
 
-public class No {
-    private int valor;
-    private No left;
-    private No right;
+public class No<T> {
+    private T objeto;
+    private No<T> left;
+    private No<T> right;
     private int fb;
 
-    public No(int valor) {
-        this.valor = valor;
+    public No(T objeto) {
+        this.objeto = objeto;
         this.left = null;
-        this.fb = this.fb;
         this.right = null;
+        this.fb = 0;
     }
 
-    public int getValor() {
-        return this.valor;
+    public T getObjeto() {
+        return this.objeto;
     }
 
-    public void setValor(int valor) {
-        this.valor = valor;
+    public void setObjeto(T objeto) {
+        this.objeto = objeto;
     }
 
-    public No getLeft() {
+    public No<T> getLeft() {
         return this.left;
     }
 
-    public void setLeft(No left) {
+    public void setLeft(No<T> left) {
         this.left = left;
     }
 
-    public No getRight() {
+    public No<T> getRight() {
         return this.right;
     }
 
-    public void setRight(No right) {
+    public void setRight(No<T> right) {
         this.right = right;
-    }
-
-    public String toString() {
-        int var10000 = this.valor;
-        return "No{valor=" + var10000 + ", left=" + String.valueOf(this.left) + ", right=" + String.valueOf(this.right) + ", fb=" + this.fb + "}";
     }
 
     public int getFb() {
@@ -48,6 +43,11 @@ public class No {
 
     public void setFb(int fb) {
         this.fb = fb;
+    }
+
+    @Override
+    public String toString() {
+        return "No{objeto=" + objeto + ", left=" + left + ", right=" + right + ", fb=" + fb + "}";
     }
 }
 
