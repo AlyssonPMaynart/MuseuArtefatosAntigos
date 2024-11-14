@@ -166,7 +166,7 @@ public class Main {
                     if (!arvoreSalario.buscar(idComparativo)) {
                         System.out.println("Funcionário encontrado na árvore. Removendo...");
                         Funcionario tempFuncionario = new Funcionario(idComparativo, "", "", 0, 0, "", "", "", 0.0);
-                        arvoreSalario.removerNo(); // Cria um Funcionario temporário para o método remover
+                        arvoreSalario.removerNo(tempFuncionario); // Cria um Funcionario temporário para o método remover
                         System.out.println("Funcionário removido com sucesso.");
                     } else {
                         System.out.println("Funcionário não encontrado na árvore.");
