@@ -25,7 +25,7 @@ public class ArvoreVisitante {
 
             if (raiz.getObjeto().getIdade() > visitante.getIdade()) {
                 raiz.setLeft(this.inserirBRec(raiz.getLeft(), visitante));
-            } else {
+            } else{
                 raiz.setRight(this.inserirBRec(raiz.getRight(), visitante));
             }
         }
@@ -74,12 +74,12 @@ public class ArvoreVisitante {
         return novoRaiz;
     }
 
-    private No rotacaoDulpaDireita(No no) {
+    private No rotacaoDulpaDireita(No no){
         no.setLeft(rotacionarEsquerda(no.getLeft()));
         return rotacionarDireita(no);
     }
 
-    private No rotacaoDulpaEsquerda(No no) {
+    private No rotacaoDulpaEsquerda(No no){
         no.setRight(rotacionarDireita(no.getRight()));
         return rotacionarEsquerda(no);
     }
@@ -105,7 +105,7 @@ public class ArvoreVisitante {
 
     private void preorderRec(No<Visitante> raiz) {
         if (raiz != null) {
-            System.out.print(raiz.getObjeto().getNome() + ": " + raiz.getObjeto().getIdade() + " | ");
+            System.out.print(raiz.getObjeto().getNome()+": "+ raiz.getObjeto().getIdade() + " | ");
             this.preorderRec(raiz.getLeft());
             this.preorderRec(raiz.getRight());
         }
@@ -119,7 +119,7 @@ public class ArvoreVisitante {
     private void inorderRec(No<Visitante> raiz) {
         if (raiz != null) {
             this.inorderRec(raiz.getLeft());
-            System.out.print(raiz.getObjeto().getNome() + ": " + raiz.getObjeto().getIdade() + " | ");
+            System.out.print(raiz.getObjeto().getNome()+": "+ raiz.getObjeto().getIdade() + " | ");
             this.inorderRec(raiz.getRight());
         }
     }
@@ -133,7 +133,7 @@ public class ArvoreVisitante {
         if (raiz != null) {
             this.postorderRec(raiz.getLeft());
             this.postorderRec(raiz.getRight());
-            System.out.print(raiz.getObjeto().getNome() + ": " + raiz.getObjeto().getIdade() + " | ");
+            System.out.print(raiz.getObjeto().getNome()+": "+ raiz.getObjeto().getIdade() + " | ");
         }
     }
 
@@ -182,7 +182,7 @@ public class ArvoreVisitante {
                 // Caso 2: nó com apenas um filho
                 if (raiz.getLeft() == null) {
                     return raiz.getRight();
-                } else if (raiz.getRight() == null) {
+                }else if (raiz.getRight() == null) {
                     return raiz.getLeft();
                 }
 
@@ -225,7 +225,7 @@ public class ArvoreVisitante {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println("Nome: " + no.getObjeto().getNome() + " Idade: " + no.getObjeto().getIdade() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Idade: "+no.getObjeto().getIdade() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }
