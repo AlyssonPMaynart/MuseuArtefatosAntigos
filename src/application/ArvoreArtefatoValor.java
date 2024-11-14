@@ -196,6 +196,7 @@ public class ArvoreArtefatoValor {
         }
     }
 
+
     public void fatorBalanceamento() {
         this.calculaFBRec(this.raiz);
     }
@@ -221,7 +222,7 @@ public class ArvoreArtefatoValor {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println( "ID: "+ no.getObjeto().getId()+" - Nome: "+ no.getObjeto().getNome()+ " Valor Historico: "+no.getObjeto().getValorHistorico() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Valor Historico: "+no.getObjeto().getValorHistorico() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }

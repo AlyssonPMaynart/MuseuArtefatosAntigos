@@ -1,7 +1,6 @@
 package application;
 
 import entities.Artefato;
-import entities.Funcionario;
 
 public class ArvoreArtefatoData {
     private No<Artefato> raiz = null;
@@ -223,25 +222,13 @@ public class ArvoreArtefatoData {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println("ID: "+ no.getObjeto().getId()+" - Nome: "+ no.getObjeto().getNome()+ " Data: "+no.getObjeto().getDatacao() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Data: "+no.getObjeto().getDatacao() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }
     }
 
-    private int contadorDeIDT = 0;
     public int contadorIDT() {
-        return this.contadorRec(this.raiz);
+        return 0;
     }
-
-    private int contadorRec(No<Artefato> raiz) {
-        int contei = 0;
-        if (raiz != null) {
-            this.contadorRec(raiz.getLeft());
-            this.contadorRec(raiz.getRight());
-            contei++;
-        }
-        return this.contadorDeIDT = contei;
-    }
-
 }
