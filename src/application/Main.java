@@ -1,5 +1,4 @@
 package application;
-
 import entities.Artefato;
 import entities.Evento;
 import entities.Funcionario;
@@ -219,13 +218,13 @@ public class Main {
                 case 5 -> { // Cadastrar Artefato
                     int id= arvoreArtefatoData.contadorIDT(); //(identificador único para cada artefato)
                     System.out.println("Nome do Artefato: ");
-                    String nomeArtefato =scanner.next();//(nome do artefato)
+                    String nomeArtefato = scanner.nextLine();//(nome do artefato)
                     System.out.println("Descrição do Artefato: ");
-                    String descricao= scanner.next(); //(descrição detalhada do artefato)
+                    String descricao= scanner.nextLine(); //(descrição detalhada do artefato)
                     System.out.println("Material do Artefato: ");
-                    String material= scanner.next();//(material do qual o artefato é feito)
+                    String material= scanner.nextLine();//(material do qual o artefato é feito)
                     System.out.println("Origem do Artefato: ");
-                    String origem= scanner.next(); //(local de origem do artefato)
+                    String origem= scanner.nextLine(); //(local de origem do artefato)
                     System.out.println("Datação do Artefato: ");
                     int data= scanner.nextInt();// (data estimada ou precisa de criação do artefato)
                     System.out.println("Estado de conservação do Artefato: ");
