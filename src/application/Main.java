@@ -7,6 +7,7 @@ import entities.Visitante;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -81,11 +82,7 @@ public class Main {
         eventos.add(new Evento("Oficina de Conservação de Artefatos", LocalDate.of(2025, 1, 20), "Oficina prática sobre conservação de artefatos antigos.", "Laboratório"));
         eventos.add(new Evento("Exposição de Arte Romana", LocalDate.of(2025, 2, 15), "Uma coleção de artefatos romanos antigos.", "Sala 2"));
 
-        // Exibindo os detalhes dos eventos
-        for (Evento evento : eventos) {
-            evento.exibirDetalhes();
-            System.out.println();
-        }
+
 
         String opcoes_menu_principal[] = {
             "Cadastrar Funcionário",
@@ -174,7 +171,11 @@ public class Main {
 
                 }
                 case 3 -> { //Eventos do Dia
-
+                    // Exibindo os detalhes dos eventos
+                    for (Evento evento : eventos) {
+                        evento.exibirDetalhes();
+                        System.out.println();
+                    }
                 }
                 case 4 -> { // Visitantes
                     opcoes_submenu = new String[] {"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
