@@ -4,7 +4,7 @@ import entities.Artefato;
 import entities.Evento;
 import entities.Funcionario;
 import entities.Visitante;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,11 +17,11 @@ public class Main {
         List<Visitante> visitantes = new ArrayList<>();
 
         ArvoreSalario arvoreSalario = new ArvoreSalario();
-        arvoreSalario.inserir(new Funcionario(1, "Alice", "123.456.789-00", 30, 123456789, "alice@example.com", "Feminino", "Zelador", 3500.00));
-        arvoreSalario.inserir(new Funcionario(2, "Bob", "987.654.321-00", 25, 987654321, "bob@example.com", "Masculino", "Historiador", 4000.00));
-        arvoreSalario.inserir(new Funcionario(3, "Carlos", "111.222.333-44", 28, 111222333, "carlos@example.com", "Masculino", "Gerente", 4500.00));
-        arvoreSalario.inserir(new Funcionario(4, "Diana", "555.666.777-88", 32, 555666777, "diana@example.com", "Feminino", "Atendente", 3800.00));
-        arvoreSalario.inserir(new Funcionario(5, "Eva", "999.888.777-66", 29, 999888777, "eva@example.com", "Feminino", "Atendente", 3700.00));
+        arvoreSalario.inserir(new Funcionario(1, "Alice", "123.456.789-00", 30, 123456789, "alice@example.com", "Feminino", "Zelador",3500.00));
+        arvoreSalario.inserir(new Funcionario(2, "Bob", "987.654.321-00", 25, 987654321, "bob@example.com", "Masculino","Historiador" ,4000.00));
+        arvoreSalario.inserir(new Funcionario(3, "Carlos", "111.222.333-44", 28, 111222333, "carlos@example.com", "Masculino", "Gerente",4500.00));
+        arvoreSalario.inserir(new Funcionario(4, "Diana", "555.666.777-88", 32, 555666777, "diana@example.com", "Feminino", "Atendente",3800.00));
+        arvoreSalario.inserir(new Funcionario(5, "Eva", "999.888.777-66", 29, 999888777, "eva@example.com", "Feminino", "Atendente",3700.00));
         arvoreSalario.inserir(new Funcionario(6, "Bruno", "987.654.321-00", 28, 987654321, "bruno@example.com", "Masculino", "Segurança", 4000.00));
         arvoreSalario.inserir(new Funcionario(7, "Carla", "456.789.123-00", 35, 456789123, "carla@example.com", "Feminino", "Recepcionista", 3200.00));
         arvoreSalario.inserir(new Funcionario(8, "Diego", "321.654.987-00", 40, 321654987, "diego@example.com", "Masculino", "Historiador", 5000.00));
@@ -63,7 +63,7 @@ public class Main {
         arvoreArtefatoValor.inserir(new Artefato(15, "Código de Hamurabi", "Estela com leis antigas da Babilônia", "Diorito", "Mesopotâmia", -1754, "Conservado", 90));
 
         ArvoreVisitante arvoreVisitante = new ArvoreVisitante();
-        arvoreVisitante.inserir(new Visitante("Matheus", "mat@seuemail.com", 4, 24, "O museu está bem organizado e limpo!"));
+        arvoreVisitante.inserir(new Visitante("Matheus", "mat@seuemail.com",4,24,"O museu está bem organizado e limpo!"));
         arvoreVisitante.inserir(new Visitante("Ana", "ana@exemplo.com", 5, 30, "Ótimo acervo! Adorei a visita."));
         arvoreVisitante.inserir(new Visitante("Bruno", "bruno@exemplo.com", 4, 22, "Muito interessante, especialmente as esculturas."));
         arvoreVisitante.inserir(new Visitante("Carla", "carla@exemplo.com", 3, 27, "Gostei do ambiente, mas poderia ter mais informações."));
@@ -88,15 +88,15 @@ public class Main {
         }
 
         String opcoes_menu_principal[] = {
-                "Cadastrar Funcionário",
-                "Listar Funcionários Pelo Salário",
-                "Deletar Funcionário",
-                "",
-                "Visitantes",
-                "Cadastrar Artefato",
-                "Listar artefatos por valor",
-                "Listar artefatos pela datação",
-                "Deletar artefatos",
+            "Cadastrar Funcionário",
+            "Listar Funcionários Pelo Salário",
+            "Deletar Funcionário",
+            "Eventos do dia",
+            "Visitantes",
+            "Cadastrar Artefato",
+            "Listar artefatos por valor",
+            "Listar artefatos pela datação",
+            "Deletar artefatos",
         };
         String opcoes_submenu[];
         int opcao, opcao_submenu;
@@ -106,10 +106,28 @@ public class Main {
             opcao_submenu = 0;
             switch (opcao) {
                 case 0 -> { // Cadastrar Funcionário
-
+                    int idFuncionario;
+                    idFuncionario = arvoreSalario.contadorIDT();
+                    System.out.println("Nome do Funcionario: ");
+                    String nomeFuncionario = scanner.next();
+                    System.out.println("CPF do Funcionario: ");
+                    String cpf = scanner.next();
+                    System.out.println("Idade do Funcionario: ");
+                    int idade= scanner.nextInt();
+                    System.out.print("Telefone do Funcionario: ");
+                    int telefone= scanner.nextInt();
+                    System.out.println("Email do Funcionario: ");
+                    String email= scanner.next();
+                    System.out.println("Sexo do Funcionario: ");
+                    String sexo= scanner.next();
+                    System.out.println("Cargo do Funcionario: ");
+                    String cargo= scanner.next();
+                    System.out.println("Salario do Funcionario: ");
+                    Double salario= scanner.nextDouble();
+                    arvoreSalario.inserir(new Funcionario(idFuncionario,nomeFuncionario,cpf,idade,telefone,email,sexo,cargo,salario));
                 }
                 case 1 -> { // Listar Funcionários Pelo Salário
-                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order", "Arvore Funcionários"};
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order","Arvore Funcionários"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -139,21 +157,44 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    } while (opcao_submenu != -1 && !is_valid);
+                    }while (opcao_submenu != -1 && !is_valid);
                 }
                 case 2 -> { // Deletar Funcionário
+                    System.out.println("Digite o ID do funcionario que deseja deletar (Caso não saiba, listar a arvore): ");
+                    int idComparativo = scanner.nextInt();
+
+                    if (!arvoreSalario.buscar(idComparativo)) {
+                        System.out.println("Funcionário encontrado na árvore. Removendo...");
+                        Funcionario tempFuncionario = new Funcionario(idComparativo, "", "", 0, 0, "", "", "", 0.0);
+                        arvoreSalario.removerNo(); // Cria um Funcionario temporário para o método remover
+                        System.out.println("Funcionário removido com sucesso.");
+                    } else {
+                        System.out.println("Funcionário não encontrado na árvore.");
+                    }
 
                 }
-                case 3 -> {
+                case 3 -> { //Eventos do Dia
 
                 }
                 case 4 -> { // Visitantes
-                    opcoes_submenu = new String[]{"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
+                    opcoes_submenu = new String[] {"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
                         switch (opcao_submenu) {
                             case 0 -> { // Cadastrar Visitante
+                                System.out.println("Nome do Visitante: ");
+                                String nome= scanner.next();
+                                System.out.println("Contato do Visitante: ");
+                                String contato= scanner.next();
+                                System.out.println("Visitas do Visitante: ");
+                                int visitas= scanner.nextInt();
+                                System.out.println("Idade do Visitante: ");
+                                int idade= scanner.nextInt();
+                                System.out.println("Feedback do Visitante: ");
+                                String ultimoFeedback= scanner.next();
+                                arvoreVisitante.inserir(new Visitante(nome,contato,visitas,idade,ultimoFeedback));
+
                                 is_valid = true;
                             }
                             case 1 -> { // Listar Visitantes pela Idade!ok
@@ -172,14 +213,31 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    } while (opcao_submenu != -1 && !is_valid);
+                    }while (opcao_submenu != -1 && !is_valid);
 
                 }
                 case 5 -> { // Cadastrar Artefato
+                    int id= arvoreArtefatoData.contadorIDT(); //(identificador único para cada artefato)
+                    System.out.println("Nome do Artefato: ");
+                    String nomeArtefato =scanner.next();//(nome do artefato)
+                    System.out.println("Descrição do Artefato: ");
+                    String descricao= scanner.next(); //(descrição detalhada do artefato)
+                    System.out.println("Material do Artefato: ");
+                    String material= scanner.next();//(material do qual o artefato é feito)
+                    System.out.println("Origem do Artefato: ");
+                    String origem= scanner.next(); //(local de origem do artefato)
+                    System.out.println("Datação do Artefato: ");
+                    int data= scanner.nextInt();// (data estimada ou precisa de criação do artefato)
+                    System.out.println("Estado de conservação do Artefato: ");
+                    String estadoConservacao= scanner.next(); //(bom, regular, ruim)
+                    System.out.println("Valor histórico do Artefato: ");
+                    int valorHistorico = scanner.nextInt(); // (descrição do valor histórico do artefato)
+                    arvoreArtefatoData.inserir(new Artefato(id,nomeArtefato,descricao,material,origem,data,estadoConservacao,valorHistorico));
+                    arvoreArtefatoValor.inserir(new Artefato(id,nomeArtefato,descricao,material,origem,data,estadoConservacao,valorHistorico));
 
                 }
                 case 6 -> { // Listar artefatos por valor
-                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order", "Arvore Artefatos"};
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order","Arvore Artefatos"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -209,10 +267,10 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    } while (opcao_submenu != -1 && !is_valid);
+                    }while (opcao_submenu != -1 && !is_valid);
                 }
                 case 7 -> { // Listar artefatos pela datação
-                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order"};
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -238,7 +296,7 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    } while (opcao_submenu != -1 && !is_valid);
+                    }while (opcao_submenu != -1 && !is_valid);
                 }
                 case 8 -> { // Deletar artefatos
 
@@ -250,19 +308,18 @@ public class Main {
                     System.out.println("Opcao invalida!");
                 }
             }
-            if (opcao != -1 && opcao_submenu != -1) {
+            if(opcao != -1 && opcao_submenu != -1){
                 System.out.println("Pressione enter para voltar ao menu principal");
                 scanner.nextLine();
             }
-        } while (opcao != -1);
+        }while(opcao != -1);
     }
-
-    public static int menu(String[] opcoes_menu_principal, String title, String go_back) {
+    public static int menu(String[] opcoes_menu_principal, String title, String go_back){
         System.out.println(title);
         String opcoes = "";
         for (int i = 0; i < opcoes_menu_principal.length; i++) {
-            System.out.println((i + 1) + " - " + opcoes_menu_principal[i]);
-            opcoes += (i + 1) + ";";
+            System.out.println((i+1) + " - " + opcoes_menu_principal[i]);
+            opcoes += (i+1) + ";";
         }
         System.out.println("0 - " + go_back);
         opcoes += "0";
@@ -275,11 +332,12 @@ public class Main {
         } catch (Exception e) {
             opcao = -1;
         }
-        if (opcao == 0) {
+        if (opcao == 0){
             System.out.println("Opcao ecolhida: 0 - " + go_back);
-        } else if (opcao > 0 & opcao <= opcoes_menu_principal.length) {
-            System.out.println("Opcao ecolhida: " + opcoes_menu_principal[opcao - 1]);
         }
-        return opcao - 1;
+        else if(opcao > 0 & opcao <= opcoes_menu_principal.length){
+            System.out.println("Opcao ecolhida: " + opcoes_menu_principal[opcao-1]);
+        }
+        return opcao-1;
     }
 }

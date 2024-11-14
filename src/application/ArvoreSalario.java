@@ -104,7 +104,7 @@ public class ArvoreSalario {
 
     private void preorderRec(No<Funcionario> raiz) {
         if (raiz != null) {
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome()+" - Salario: "+ raiz.getObjeto().getSalario() + " |");
             this.preorderRec(raiz.getLeft());
             this.preorderRec(raiz.getRight());
         }
@@ -118,7 +118,7 @@ public class ArvoreSalario {
     private void inorderRec(No<Funcionario> raiz) {
         if (raiz != null) {
             this.inorderRec(raiz.getLeft());
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome()+" - Salario: "+ raiz.getObjeto().getSalario() + " |");
             this.inorderRec(raiz.getRight());
         }
     }
@@ -132,32 +132,23 @@ public class ArvoreSalario {
         if (raiz != null) {
             this.postorderRec(raiz.getLeft());
             this.postorderRec(raiz.getRight());
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome()+" - Salario: "+ raiz.getObjeto().getSalario() + " |");
         }
     }
 
-    public boolean buscar(Funcionario funcionario) {
-        if (this.buscarRec(this.raiz, funcionario)) {
-            System.out.println("O funcionário com salário " + funcionario.getSalario() + " está na árvore.");
+    public boolean buscar(int idFuncionario) {
+        return buscarRec(raiz, idFuncionario);
+    }
+
+    private boolean buscarRec(No<Funcionario> no, int idFuncionario) {
+        if (no == null) {
+            return false;
+        } else if (no.getObjeto().getIdFuncionario() == idFuncionario) {
             return true;
+        } else if (idFuncionario < no.getObjeto().getIdFuncionario()) {
+            return buscarRec(no.getLeft(), idFuncionario);
         } else {
-            System.out.println("O funcionário com salário " + funcionario.getSalario() + " não está na árvore.");
-            return false;
-        }
-    }
-
-    private boolean buscarRec(No<Funcionario> raiz, Funcionario funcionario) {
-        if (raiz == null) {
-            return false;
-        } else {
-
-            if (raiz.getObjeto().getSalario().equals(funcionario.getSalario())) {
-                return true;
-            } else if (funcionario.getSalario() < raiz.getObjeto().getSalario()) {
-                return this.buscarRec(raiz.getLeft(), funcionario);
-            } else {
-                return this.buscarRec(raiz.getRight(), funcionario);
-            }
+            return buscarRec(no.getRight(), idFuncionario);
         }
     }
 
@@ -199,7 +190,6 @@ public class ArvoreSalario {
         }
     }
 
-
     public void fatorBalanceamento() {
         this.calculaFBRec(this.raiz);
     }
@@ -225,10 +215,25 @@ public class ArvoreSalario {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Salario: "+no.getObjeto().getSalario() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "ID: "+ no.getObjeto().getIdFuncionario()+" - Nome: "+ no.getObjeto().getNome()+ " Salario: "+no.getObjeto().getSalario() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }
+    }
+
+    private int contadorDeIDT = 0;
+    public int contadorIDT() {
+        return this.contadorRec(this.raiz);
+    }
+
+    private int contadorRec(No<Funcionario> raiz) {
+        int contei = 0;
+        if (raiz != null) {
+            this.contadorRec(raiz.getLeft());
+            this.contadorRec(raiz.getRight());
+            contei++;
+        }
+        return this.contadorDeIDT = contei;
     }
 }
 
