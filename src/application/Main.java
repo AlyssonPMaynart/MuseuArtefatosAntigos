@@ -31,5 +31,181 @@ public class Main {
         // Imprimindo a árvore após a remoção
         System.out.println("\nÁrvore após a remoção de Carlos:");
         arvoreSalario.imprimirArvore();
- }
+        String opcoes_menu_principal[] = {
+            "Cadastrar Funcionário",
+            "Listar Funcionários Pelo Salário",
+            "Deletar Funcionário",
+            "",
+            "Visitantes",
+            "Cadastrar Artefato",
+            "Listar artefatos por valor",
+            "Listar artefatos pela datação",
+            "Deletar artefatos",
+        };
+        String opcoes_submenu[];
+        int opcao, opcao_submenu;
+        boolean is_valid;
+        do {
+            opcao = menu(opcoes_menu_principal, "Menu principal", "Sair do programa");
+            opcao_submenu = 0;
+            switch (opcao) {
+                case 0 -> { // Cadastrar Funcionário
+
+                }
+                case 1 -> { // Listar Funcionários Pelo Salário
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order"};
+                    is_valid = false;
+                    do {
+                        opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
+                        switch (opcao_submenu) {
+                            case 0 -> { // Pré-Order
+                                is_valid = true;
+                            }
+                            case 1 -> { // Post-Order
+                                is_valid = true;
+                            }
+                            case 2 -> { // In-Order
+                                is_valid = true;
+                            }
+                            case -1 -> {
+//                                System.out.println("Voltando ao menu principal!");
+                            }
+                            default -> {
+                                System.out.println("Opcao invalida!");
+                                System.out.println("Pressione enter para continuar");
+                                scanner.nextLine();
+                            }
+                        }
+                    }while (opcao_submenu != -1 && !is_valid);
+                }
+                case 2 -> { // Deletar Funcionário
+
+                }
+                case 3 -> {
+
+                }
+                case 4 -> { // Visitantes
+                    opcoes_submenu = new String[] {"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
+                    is_valid = false;
+                    do {
+                        opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
+                        switch (opcao_submenu) {
+                            case 0 -> { // Cadastrar Visitante
+                                is_valid = true;
+                            }
+                            case 1 -> { // Listar Visitantes pela Idade
+                                is_valid = true;
+                            }
+                            case 2 -> { // Deletar Visitante
+                                is_valid = true;
+                            }
+                            case -1 -> {
+//                                System.out.println("Voltando ao menu principal!");
+                            }
+                            default -> {
+                                System.out.println("Opcao invalida!");
+                                System.out.println("Pressione enter para continuar");
+                                scanner.nextLine();
+                            }
+                        }
+                    }while (opcao_submenu != -1 && !is_valid);
+
+                }
+                case 5 -> { // Cadastrar Artefato
+
+                }
+                case 6 -> { // Listar artefatos por valor
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order"};
+                    is_valid = false;
+                    do {
+                        opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
+                        switch (opcao_submenu) {
+                            case 0 -> { // Pré-Order
+                                is_valid = true;
+                            }
+                            case 1 -> { // Post-Order
+                                is_valid = true;
+                            }
+                            case 2 -> { // In-Order
+                                is_valid = true;
+                            }
+                            case -1 -> {
+//                                System.out.println("Voltando ao menu principal!");
+                            }
+                            default -> {
+                                System.out.println("Opcao invalida!");
+                                System.out.println("Pressione enter para continuar");
+                                scanner.nextLine();
+                            }
+                        }
+                    }while (opcao_submenu != -1 && !is_valid);
+                }
+                case 7 -> { // Listar artefatos pela datação
+                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order"};
+                    is_valid = false;
+                    do {
+                        opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
+                        switch (opcao_submenu) {
+                            case 0 -> { // Pré-Order
+                                is_valid = true;
+                            }
+                            case 1 -> { // Post-Order
+                                is_valid = true;
+                            }
+                            case 2 -> { // In-Order
+                                is_valid = true;
+                            }
+                            case -1 -> {
+//                                System.out.println("Voltando ao menu principal!");
+                            }
+                            default -> {
+                                System.out.println("Opcao invalida!");
+                                System.out.println("Pressione enter para continuar");
+                                scanner.nextLine();
+                            }
+                        }
+                    }while (opcao_submenu != -1 && !is_valid);
+                }
+                case 8 -> { // Deletar artefatos
+
+                }
+                case -1 -> {
+                    System.out.println("Encerrando o programa!");
+                }
+                default -> {
+                    System.out.println("Opcao invalida!");
+                }
+            }
+            if(opcao != -1 && opcao_submenu != -1){
+                System.out.println("Pressione enter para voltar ao menu principal");
+                scanner.nextLine();
+            }
+        }while(opcao != -1);
+    }
+    public static int menu(String[] opcoes_menu_principal, String title, String go_back){
+        System.out.println(title);
+        String opcoes = "";
+        for (int i = 0; i < opcoes_menu_principal.length; i++) {
+            System.out.println((i+1) + " - " + opcoes_menu_principal[i]);
+            opcoes += (i+1) + ";";
+        }
+        System.out.println("0 - " + go_back);
+        opcoes += "0";
+        System.out.print("Escolha uma opcao (" + opcoes + "): ");
+        Scanner s = new Scanner(System.in);
+        int opcao;
+        try {
+            opcao = s.nextInt();
+
+        } catch (Exception e) {
+            opcao = -1;
+        }
+        if (opcao == 0){
+            System.out.println("Opcao ecolhida: 0 - " + go_back);
+        }
+        else if(opcao > 0 & opcao <= opcoes_menu_principal.length){
+            System.out.println("Opcao ecolhida: " + opcoes_menu_principal[opcao-1]);
+        }
+        return opcao-1;
+    }
 }
