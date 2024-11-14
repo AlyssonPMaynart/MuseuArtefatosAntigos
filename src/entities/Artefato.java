@@ -9,12 +9,12 @@ import java.util.List;
         private String descricao; //(descrição detalhada do artefato)
         private String material; //(material do qual o artefato é feito)
         private String origem; //(local de origem do artefato)
-        private Date datacao; // (data estimada ou precisa de criação do artefato)
+        private int datacao; // (data estimada ou precisa de criação do artefato)
         private String estadoConservacao; //(bom, regular, ruim)
-        private String valorHistorico; // (descrição do valor histórico do artefato)
-        private List<Evento> historico; // (Lista de eventos relacionados ao artefato como aquisição, restauração, exposição)
+        private int valorHistorico; // (descrição do valor histórico do artefato)
 
-        public Artefato() {
+
+        public Artefato(int id, String nome, String descricao, String material, String origem, int datacao, String estadoConservacao, int valorHistorico) {
             this.id = id;
             this.nome = nome;
             this.descricao = descricao;
@@ -23,8 +23,6 @@ import java.util.List;
             this.datacao = datacao;
             this.estadoConservacao = estadoConservacao;
             this.valorHistorico = valorHistorico;
-            this.historico = historico;
-
         }
 
         public int getId() {
@@ -67,11 +65,11 @@ import java.util.List;
             this.origem = origem;
         }
 
-        public Date getDatacao() {
+        public int getDatacao() {
             return datacao;
         }
 
-        public void setDatacao(Date datacao) {
+        public void setDatacao(int datacao) {
             this.datacao = datacao;
         }
 
@@ -83,19 +81,12 @@ import java.util.List;
             this.estadoConservacao = estadoConservacao;
         }
 
-        public String getValorHistorico() {
+        public int getValorHistorico() {
             return valorHistorico;
         }
 
-        public void setValorHistorico(String valorHistorico) {
+        public void setValorHistorico(int valorHistorico) {
             this.valorHistorico = valorHistorico;
         }
 
-        public List<Evento> getHistorico() {
-            return historico;
-        }
-
-        public void setHistorico(List<Evento> historico) {
-            this.historico = historico;
-        }
     }

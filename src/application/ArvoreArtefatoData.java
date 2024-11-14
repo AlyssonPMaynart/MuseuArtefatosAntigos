@@ -1,31 +1,29 @@
 package application;
 
-import entities.Funcionario;
+import entities.Artefato;
 
-
-
-public class ArvoreSalario {
-    private No<Funcionario> raiz = null;
+public class ArvoreArtefatoData {
+    private No<Artefato> raiz = null;
     private int fatorBal;
 
 
     // Construtor que ordena a árvore pelo salário do Funcionario
-    public ArvoreSalario() {
+    public ArvoreArtefatoData() {
     }
 
-    public void inserir(Funcionario funcionario) {
-        this.raiz = this.inserirBRec(this.raiz, funcionario);
+    public void inserir(Artefato artefato) {
+        this.raiz = this.inserirBRec(this.raiz, artefato);
     }
 
-    private No<Funcionario> inserirBRec(No<Funcionario> raiz, Funcionario funcionario) {
+    private No<Artefato> inserirBRec(No<Artefato> raiz, Artefato artefato) {
         if (raiz == null) {
-            return new No<>(funcionario);
+            return new No<>(artefato);
         } else {
 
-            if (raiz.getObjeto().getSalario() > funcionario.getSalario()) {
-                raiz.setLeft(this.inserirBRec(raiz.getLeft(), funcionario));
+            if (raiz.getObjeto().getDatacao() > artefato.getDatacao()) {
+                raiz.setLeft(this.inserirBRec(raiz.getLeft(), artefato));
             } else{
-                raiz.setRight(this.inserirBRec(raiz.getRight(), funcionario));
+                raiz.setRight(this.inserirBRec(raiz.getRight(), artefato));
             }
         }
         fatorBalanceamento();
@@ -102,9 +100,9 @@ public class ArvoreSalario {
         System.out.println("Arvore preorder");
     }
 
-    private void preorderRec(No<Funcionario> raiz) {
+    private void preorderRec(No<Artefato> raiz) {
         if (raiz != null) {
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome() +": "+ raiz.getObjeto().getDatacao() + " |");
             this.preorderRec(raiz.getLeft());
             this.preorderRec(raiz.getRight());
         }
@@ -115,10 +113,10 @@ public class ArvoreSalario {
         System.out.println("Arvore inorder");
     }
 
-    private void inorderRec(No<Funcionario> raiz) {
+    private void inorderRec(No<Artefato> raiz) {
         if (raiz != null) {
             this.inorderRec(raiz.getLeft());
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome() +": "+raiz.getObjeto().getDatacao() + " |");
             this.inorderRec(raiz.getRight());
         }
     }
@@ -128,51 +126,50 @@ public class ArvoreSalario {
         System.out.println("Árvore postorder");
     }
 
-    private void postorderRec(No<Funcionario> raiz) {
+    private void postorderRec(No<Artefato> raiz) {
         if (raiz != null) {
             this.postorderRec(raiz.getLeft());
             this.postorderRec(raiz.getRight());
-            System.out.print(raiz.getObjeto().getSalario() + " ");
+            System.out.print(raiz.getObjeto().getNome() +": "+raiz.getObjeto().getDatacao() + " |");
         }
     }
 
-    public boolean buscar(Funcionario funcionario) {
-        if (this.buscarRec(this.raiz, funcionario)) {
-            System.out.println("O funcionário com salário " + funcionario.getSalario() + " está na árvore.");
+    public boolean buscar(Artefato artefato) {
+        if (this.buscarRec(this.raiz, artefato)) {
+            System.out.println("O artefato com data " + artefato.getDatacao() + " está na árvore.");
             return true;
         } else {
-            System.out.println("O funcionário com salário " + funcionario.getSalario() + " não está na árvore.");
+            System.out.println("O artefato com data " + artefato.getDatacao() + " não está na árvore.");
             return false;
         }
     }
 
-    private boolean buscarRec(No<Funcionario> raiz, Funcionario funcionario) {
+    private boolean buscarRec(No<Artefato> raiz, Artefato artefato) {
         if (raiz == null) {
             return false;
         } else {
-
-            if (raiz.getObjeto().getSalario().equals(funcionario.getSalario())) {
+            if (artefato.getDatacao() == raiz.getObjeto().getDatacao()) {
                 return true;
-            } else if (funcionario.getSalario() < raiz.getObjeto().getSalario()) {
-                return this.buscarRec(raiz.getLeft(), funcionario);
+            } else if (raiz.getObjeto().getDatacao() < artefato.getDatacao()) {
+                return this.buscarRec(raiz.getLeft(), artefato);
             } else {
-                return this.buscarRec(raiz.getRight(), funcionario);
+                return this.buscarRec(raiz.getRight(), artefato);
             }
         }
     }
 
-    public void removerNo(Funcionario funcionario) {
-        this.raiz = this.removerRec(this.raiz, funcionario);
+    public void removerNo(Artefato artefato) {
+        this.raiz = this.removerRec(this.raiz, artefato);
     }
 
-    private No<Funcionario> removerRec(No<Funcionario> raiz, Funcionario funcionario) {
+    private No<Artefato> removerRec(No<Artefato> raiz, Artefato artefato) {
         if (raiz == null) {
             return null;
         } else {
-            if (raiz.getObjeto().getSalario() > funcionario.getSalario()) {
-                raiz.setLeft(this.removerRec(raiz.getLeft(), funcionario));
-            } else if (raiz.getObjeto().getSalario() < funcionario.getSalario()) {
-                raiz.setRight(this.removerRec(raiz.getRight(), funcionario));
+            if (raiz.getObjeto().getDatacao() > artefato.getDatacao()) {
+                raiz.setLeft(this.removerRec(raiz.getLeft(), artefato));
+            } else if (raiz.getObjeto().getDatacao() < artefato.getDatacao()) {
+                raiz.setRight(this.removerRec(raiz.getRight(), artefato));
             } else {
                 // Caso 1: nó sem filhos
                 if (raiz.getLeft() == null && raiz.getRight() == null) {
@@ -187,7 +184,7 @@ public class ArvoreSalario {
                 }
 
                 // // Caso 3: nó com dois filhos - Substituição pelo menor valor da subárvore direita
-                No<Funcionario> temp = raiz.getRight();
+                No<Artefato> temp = raiz.getRight();
                 while (temp.getLeft() != null) {
                     temp = temp.getLeft();
                 }
@@ -204,7 +201,7 @@ public class ArvoreSalario {
         this.calculaFBRec(this.raiz);
     }
 
-    private int calculaFBRec(No<Funcionario> no) {
+    private int calculaFBRec(No<Artefato> no) {
         if (no == null) {
             return 0;
         } else {
@@ -220,15 +217,14 @@ public class ArvoreSalario {
         this.imprimirArvoreRec(this.raiz, 0);
     }
 
-    private void imprimirArvoreRec(No<Funcionario> no, int nivel) {
+    private void imprimirArvoreRec(No<Artefato> no, int nivel) {
         if (no != null) {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Salario: "+no.getObjeto().getSalario() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Data: "+no.getObjeto().getDatacao() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }
     }
 }
-
