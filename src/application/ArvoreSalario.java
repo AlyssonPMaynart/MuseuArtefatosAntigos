@@ -175,15 +175,19 @@ public class ArvoreSalario {
             } else if (raiz.getObjeto().getSalario() < funcionario.getSalario()) {
                 raiz.setRight(this.removerRec(raiz.getRight(), funcionario));
             } else {
-                if (raiz.getLeft() == null) {
-                    return raiz.getRight();
+                // Caso 1: nó sem filhos
+                if (raiz.getLeft() == null && raiz.getRight() == null) {
+                    return null;
                 }
 
-                if (raiz.getRight() == null) {
+                // Caso 2: nó com apenas um filho
+                if (raiz.getLeft() == null) {
+                    return raiz.getRight();
+                }else if (raiz.getRight() == null) {
                     return raiz.getLeft();
                 }
 
-                // Substituição pelo menor valor da subárvore direita
+                // // Caso 3: nó com dois filhos - Substituição pelo menor valor da subárvore direita
                 No<Funcionario> temp = raiz.getRight();
                 while (temp.getLeft() != null) {
                     temp = temp.getLeft();
