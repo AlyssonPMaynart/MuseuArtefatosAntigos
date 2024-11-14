@@ -22,15 +22,80 @@ public class ArvoreSalario {
         if (raiz == null) {
             return new No<>(funcionario);
         } else {
-            int comparacao = comparator.compare(funcionario, raiz.getObjeto());
-            if (comparacao < 0) {
+
+            if (raiz.getObjeto().getSalario() > funcionario.getSalario()) {
                 raiz.setLeft(this.inserirBRec(raiz.getLeft(), funcionario));
-            } else if (comparacao > 0) {
+            } else{
                 raiz.setRight(this.inserirBRec(raiz.getRight(), funcionario));
             }
-
-            return raiz;
         }
+        fatorBalanceamento();
+        return ajustarBalanceamento(raiz);
+    }
+
+    private No ajustarBalanceamento(No noAtual) {
+        if (noAtual.getFb() > 1) {
+            if (noAtual.getLeft().getFb() >= 0) {
+                return rotacionarDireita(noAtual);
+            } else {
+                return rotacaoDulpaDireita(noAtual);
+            }
+        }
+
+        if (noAtual.getFb() < -1) {
+            if (noAtual.getRight().getFb() <= 0) {
+                return rotacionarEsquerda(noAtual);
+            } else {
+                return rotacaoDulpaEsquerda(noAtual);
+            }
+        }
+
+        return noAtual;
+    }
+
+    private No rotacionarDireita(No no) {
+        No novoRaiz = no.getLeft();
+        No subArvoreDireita = novoRaiz.getRight();
+        no.setLeft(subArvoreDireita);
+        novoRaiz.setRight(no);
+        no.setFb(calcularFatorBalanceamento(no));
+        novoRaiz.setFb(calcularFatorBalanceamento(novoRaiz));
+
+        return novoRaiz;
+    }
+
+    private No rotacionarEsquerda(No no) {
+        No novoRaiz = no.getRight();
+        No subArvoreEsquerda = novoRaiz.getLeft();
+        novoRaiz.setLeft(no);
+        no.setRight(subArvoreEsquerda);
+        no.setFb(calcularFatorBalanceamento(no));
+        novoRaiz.setFb(calcularFatorBalanceamento(novoRaiz));
+        return novoRaiz;
+    }
+
+    private No rotacaoDulpaDireita(No no){
+        no.setLeft(rotacionarEsquerda(no.getLeft()));
+        return rotacionarDireita(no);
+    }
+
+    private No rotacaoDulpaEsquerda(No no){
+        no.setRight(rotacionarDireita(no.getRight()));
+        return rotacionarEsquerda(no);
+    }
+
+    private int calcularFatorBalanceamento(No no) {
+        if (no == null) {
+            return 0;
+        }
+        return calculaAltura(no.getLeft()) - calculaAltura(no.getRight());
+    }
+
+    private int calculaAltura(No no) {
+        if (no == null) {
+            return 0;
+        }
+        return Math.max(calculaAltura(no.getLeft()), calculaAltura(no.getRight())) + 1;
     }
 
     public void preorder() {
@@ -105,10 +170,9 @@ public class ArvoreSalario {
         if (raiz == null) {
             return null;
         } else {
-            int comparacao = comparator.compare(funcionario, raiz.getObjeto());
-            if (comparacao < 0) {
+            if (raiz.getObjeto().getSalario() > funcionario.getSalario()) {
                 raiz.setLeft(this.removerRec(raiz.getLeft(), funcionario));
-            } else if (comparacao > 0) {
+            } else if (raiz.getObjeto().getSalario() < funcionario.getSalario()) {
                 raiz.setRight(this.removerRec(raiz.getRight(), funcionario));
             } else {
                 if (raiz.getLeft() == null) {
@@ -127,10 +191,11 @@ public class ArvoreSalario {
                 raiz.setObjeto(temp.getObjeto());
                 raiz.setRight(this.removerRec(raiz.getRight(), temp.getObjeto()));
             }
-
-            return raiz;
+            fatorBalanceamento();
+            return ajustarBalanceamento(raiz);
         }
     }
+
 
     public void fatorBalanceamento() {
         this.calculaFBRec(this.raiz);
@@ -157,7 +222,7 @@ public class ArvoreSalario {
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println(no.getObjeto().getSalario() + " nível: " + nivel + " FB: " + no.getFb());
+            System.out.println( "Nome: "+ no.getObjeto().getNome()+ " Salario: "+no.getObjeto().getSalario() + " nível: " + nivel + " FB: " + no.getFb());
             this.imprimirArvoreRec(no.getLeft(), nivel + 1);
             this.imprimirArvoreRec(no.getRight(), nivel + 1);
         }
