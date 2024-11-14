@@ -1,9 +1,10 @@
 package application;
+
 import entities.Artefato;
 import entities.Evento;
 import entities.Funcionario;
 import entities.Visitante;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,11 +17,11 @@ public class Main {
         List<Visitante> visitantes = new ArrayList<>();
 
         ArvoreSalario arvoreSalario = new ArvoreSalario();
-        arvoreSalario.inserir(new Funcionario(1, "Alice", "123.456.789-00", 30, 123456789, "alice@example.com", "Feminino", "Zelador",3500.00));
-        arvoreSalario.inserir(new Funcionario(2, "Bob", "987.654.321-00", 25, 987654321, "bob@example.com", "Masculino","Historiador" ,4000.00));
-        arvoreSalario.inserir(new Funcionario(3, "Carlos", "111.222.333-44", 28, 111222333, "carlos@example.com", "Masculino", "Gerente",4500.00));
-        arvoreSalario.inserir(new Funcionario(4, "Diana", "555.666.777-88", 32, 555666777, "diana@example.com", "Feminino", "Atendente",3800.00));
-        arvoreSalario.inserir(new Funcionario(5, "Eva", "999.888.777-66", 29, 999888777, "eva@example.com", "Feminino", "Atendente",3700.00));
+        arvoreSalario.inserir(new Funcionario(1, "Alice", "123.456.789-00", 30, 123456789, "alice@example.com", "Feminino", "Zelador", 3500.00));
+        arvoreSalario.inserir(new Funcionario(2, "Bob", "987.654.321-00", 25, 987654321, "bob@example.com", "Masculino", "Historiador", 4000.00));
+        arvoreSalario.inserir(new Funcionario(3, "Carlos", "111.222.333-44", 28, 111222333, "carlos@example.com", "Masculino", "Gerente", 4500.00));
+        arvoreSalario.inserir(new Funcionario(4, "Diana", "555.666.777-88", 32, 555666777, "diana@example.com", "Feminino", "Atendente", 3800.00));
+        arvoreSalario.inserir(new Funcionario(5, "Eva", "999.888.777-66", 29, 999888777, "eva@example.com", "Feminino", "Atendente", 3700.00));
         arvoreSalario.inserir(new Funcionario(6, "Bruno", "987.654.321-00", 28, 987654321, "bruno@example.com", "Masculino", "Segurança", 4000.00));
         arvoreSalario.inserir(new Funcionario(7, "Carla", "456.789.123-00", 35, 456789123, "carla@example.com", "Feminino", "Recepcionista", 3200.00));
         arvoreSalario.inserir(new Funcionario(8, "Diego", "321.654.987-00", 40, 321654987, "diego@example.com", "Masculino", "Historiador", 5000.00));
@@ -62,7 +63,7 @@ public class Main {
         arvoreArtefatoValor.inserir(new Artefato(15, "Código de Hamurabi", "Estela com leis antigas da Babilônia", "Diorito", "Mesopotâmia", -1754, "Conservado", 90));
 
         ArvoreVisitante arvoreVisitante = new ArvoreVisitante();
-        arvoreVisitante.inserir(new Visitante("Matheus", "mat@seuemail.com",4,24,"O museu está bem organizado e limpo!"));
+        arvoreVisitante.inserir(new Visitante("Matheus", "mat@seuemail.com", 4, 24, "O museu está bem organizado e limpo!"));
         arvoreVisitante.inserir(new Visitante("Ana", "ana@exemplo.com", 5, 30, "Ótimo acervo! Adorei a visita."));
         arvoreVisitante.inserir(new Visitante("Bruno", "bruno@exemplo.com", 4, 22, "Muito interessante, especialmente as esculturas."));
         arvoreVisitante.inserir(new Visitante("Carla", "carla@exemplo.com", 3, 27, "Gostei do ambiente, mas poderia ter mais informações."));
@@ -74,16 +75,28 @@ public class Main {
         arvoreVisitante.inserir(new Visitante("Isabela", "isabela@exemplo.com", 4, 26, "Gostei muito da visita guiada."));
         arvoreVisitante.inserir(new Visitante("João", "joao@exemplo.com", 5, 32, "Foi uma experiência muito enriquecedora!"));
 
+        List<Evento> eventos = new ArrayList<>();
+        eventos.add(new Evento("Exposição de Arte Egípcia", LocalDate.of(2024, 12, 5), "Uma coleção de artefatos egípcios antigos.", "Sala 1"));
+        eventos.add(new Evento("Palestra sobre a Idade Média", LocalDate.of(2024, 12, 10), "Uma palestra sobre a vida e cultura na Idade Média.", "Auditório"));
+        eventos.add(new Evento("Oficina de Conservação de Artefatos", LocalDate.of(2025, 1, 20), "Oficina prática sobre conservação de artefatos antigos.", "Laboratório"));
+        eventos.add(new Evento("Exposição de Arte Romana", LocalDate.of(2025, 2, 15), "Uma coleção de artefatos romanos antigos.", "Sala 2"));
+
+        // Exibindo os detalhes dos eventos
+        for (Evento evento : eventos) {
+            evento.exibirDetalhes();
+            System.out.println();
+        }
+
         String opcoes_menu_principal[] = {
-            "Cadastrar Funcionário",
-            "Listar Funcionários Pelo Salário",
-            "Deletar Funcionário",
-            "",
-            "Visitantes",
-            "Cadastrar Artefato",
-            "Listar artefatos por valor",
-            "Listar artefatos pela datação",
-            "Deletar artefatos",
+                "Cadastrar Funcionário",
+                "Listar Funcionários Pelo Salário",
+                "Deletar Funcionário",
+                "",
+                "Visitantes",
+                "Cadastrar Artefato",
+                "Listar artefatos por valor",
+                "Listar artefatos pela datação",
+                "Deletar artefatos",
         };
         String opcoes_submenu[];
         int opcao, opcao_submenu;
@@ -96,7 +109,7 @@ public class Main {
 
                 }
                 case 1 -> { // Listar Funcionários Pelo Salário
-                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order","Arvore Funcionários"};
+                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order", "Arvore Funcionários"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -126,7 +139,7 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    }while (opcao_submenu != -1 && !is_valid);
+                    } while (opcao_submenu != -1 && !is_valid);
                 }
                 case 2 -> { // Deletar Funcionário
 
@@ -135,7 +148,7 @@ public class Main {
 
                 }
                 case 4 -> { // Visitantes
-                    opcoes_submenu = new String[] {"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
+                    opcoes_submenu = new String[]{"Cadastrar Visitante", "Listar Visitantes pela Idade", "Deletar Visitante"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -159,14 +172,14 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    }while (opcao_submenu != -1 && !is_valid);
+                    } while (opcao_submenu != -1 && !is_valid);
 
                 }
                 case 5 -> { // Cadastrar Artefato
 
                 }
                 case 6 -> { // Listar artefatos por valor
-                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order","Arvore Artefatos"};
+                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order", "Arvore Artefatos"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -196,10 +209,10 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    }while (opcao_submenu != -1 && !is_valid);
+                    } while (opcao_submenu != -1 && !is_valid);
                 }
                 case 7 -> { // Listar artefatos pela datação
-                    opcoes_submenu = new String[] {"Pré-Order", "Post-Order", "In-Order"};
+                    opcoes_submenu = new String[]{"Pré-Order", "Post-Order", "In-Order"};
                     is_valid = false;
                     do {
                         opcao_submenu = menu(opcoes_submenu, opcoes_menu_principal[opcao], "Voltar ao menu principal");
@@ -225,7 +238,7 @@ public class Main {
                                 scanner.nextLine();
                             }
                         }
-                    }while (opcao_submenu != -1 && !is_valid);
+                    } while (opcao_submenu != -1 && !is_valid);
                 }
                 case 8 -> { // Deletar artefatos
 
@@ -237,18 +250,19 @@ public class Main {
                     System.out.println("Opcao invalida!");
                 }
             }
-            if(opcao != -1 && opcao_submenu != -1){
+            if (opcao != -1 && opcao_submenu != -1) {
                 System.out.println("Pressione enter para voltar ao menu principal");
                 scanner.nextLine();
             }
-        }while(opcao != -1);
+        } while (opcao != -1);
     }
-    public static int menu(String[] opcoes_menu_principal, String title, String go_back){
+
+    public static int menu(String[] opcoes_menu_principal, String title, String go_back) {
         System.out.println(title);
         String opcoes = "";
         for (int i = 0; i < opcoes_menu_principal.length; i++) {
-            System.out.println((i+1) + " - " + opcoes_menu_principal[i]);
-            opcoes += (i+1) + ";";
+            System.out.println((i + 1) + " - " + opcoes_menu_principal[i]);
+            opcoes += (i + 1) + ";";
         }
         System.out.println("0 - " + go_back);
         opcoes += "0";
@@ -261,12 +275,11 @@ public class Main {
         } catch (Exception e) {
             opcao = -1;
         }
-        if (opcao == 0){
+        if (opcao == 0) {
             System.out.println("Opcao ecolhida: 0 - " + go_back);
+        } else if (opcao > 0 & opcao <= opcoes_menu_principal.length) {
+            System.out.println("Opcao ecolhida: " + opcoes_menu_principal[opcao - 1]);
         }
-        else if(opcao > 0 & opcao <= opcoes_menu_principal.length){
-            System.out.println("Opcao ecolhida: " + opcoes_menu_principal[opcao-1]);
-        }
-        return opcao-1;
+        return opcao - 1;
     }
 }
